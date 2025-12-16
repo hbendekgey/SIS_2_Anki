@@ -21,9 +21,9 @@ pip install pandas
 The `make_anki_csv` file can be run to generate your first deck. However, first you must update the line to make sure `ANKI_USERNAME` matches what you see in Anki. If you want to use idphotos in your deck, the images must be stored in a specific directory that depends on the username.
 
 **Usage:**
-`./make_anki_csv.sh <roster_filename.pdf> <target_filename.csv> <Note for students (in quotes)>`
+`./gen_deck_csv.sh <roster_filename.pdf> <target_filename.csv> <Note for students (in quotes)>`
 
-**Example:** `./make_anki_csv.sh sis_rosters/cs61_25f.pdf decks/fall2025.csv "CS61 Student Fall 2025"`
+**Example:** `./gen_deck_csv.sh sis_rosters/cs61_25f.pdf decks/fall2025.csv "CS61 Student Fall 2025"`
 
 ## Anki Setup
 
@@ -44,22 +44,22 @@ Finally, in the "Browse" menu, click "Cards..." in the top right, and update the
 
 You can edit your deck manually in the Anki app.
 
-To avoid creating duplicate cards for the same student, I recommend **not** creating independent csv files for import. Instead, you should use `update_anki_csv.sh` to merge an existing deck with a new SIS roster pdf. However, if you've made changes to the deck in Anki, the first step is to export those changes into a csv file.
+To avoid creating duplicate cards for the same student, I recommend **not** creating independent csv files for import. Instead, you can add a fourth element to `gen_deck_csv.sh` to merge an existing deck with a new SIS roster pdf. This will handle recurring students by adding new notes to their card instead of creating a duplicate card. If you've made changes to the deck in Anki, the first step is to export those in-app changes into a csv file.
 
-Under the "Decks" tab, click the gear next to your deck then "Export". The format you want is "Notes in Plain Text". You don't need to check any boxes. The output will be a .txt file but it is formatted like a csv and can be consumed by `update_anki_csv.sh`.
+Under the "Decks" tab, click the gear next to your deck then "Export". The format you want is "Notes in Plain Text". You don't need to check any boxes. The output will be a .txt file but it is formatted like a csv and can be consumed by `gen_deck_csv.sh`.
 
 ## Updating an Anki Deck
 
-Finally, if you want to add new students to your deck, you can use the script `update_anki_csv.sh`. This script takes an Anki deck, a SIS roster, and a "note", and:
+Finally, if you want to add new students to your deck, you can use the script `gen_deck_csv.sh` with a fourth argument. This script takes an Anki deck, a SIS roster, and a "note", and:
 * Identifies any students (via their ID number) in the roster who are not yet in the deck, and adds them with `Front=<note string>`.
 * For the remaining students, adds `\n<note string>` to `Front` *if it is not already present*.
 
 This allows you to track a student across multiple terms, adding notes as they attend more of your classes. 
 
 **Usage:**
-`./update_anki_csv.sh <roster_filename.pdf> <deck_filename.csv> <target_filename.csv> <Note for students (in quotes)>`
+`./gen_deck_csv.sh <roster_filename.pdf> <target_filename.csv> '<Note for students>' [deck_filename.csv]`
 
-**Example:** `./update_anki_csv.sh sis_rosters/cs61_25f.pdf decks/fall2025.csv decks/fall2025_updated.csv "CS160 Student Spring 2026"`
+**Example:** `./gen_deck_csv.sh sis_rosters/cs61_25f.pdf decks/fall2025_updated.csv "CS160 Student Spring 2026" decks/fall2025.csv`
 
 **Notes:** 
 * You might consider uploading a roster multiple times as the term progresses because students enroll up until the add deadline. If you do this, you should make sure to use the exact same note string so that you don't double up in adding notes to students enrolled since the beginning.
