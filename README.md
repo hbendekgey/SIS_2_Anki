@@ -18,7 +18,7 @@ pip install pandas
 
 ## Creating a Deck
 
-The `make_anki_csv` file can be run to generate your first deck. However, first you must update the line to make sure `ANKI_USERNAME` matches what you see in Anki. If you want to use idphotos in your deck, the images must be stored in a specific directory that depends on the username.
+The `gen_deck_csv.sh` file can be run to generate your first deck. However, first you must update the line to make sure `ANKI_USERNAME` matches what you see in Anki. If you want to use idphotos in your deck, the images must be stored in a specific directory that depends on the username.
 
 **Usage:**
 `./gen_deck_csv.sh <roster_filename.pdf> <target_filename.csv> <Note for students (in quotes)>`
