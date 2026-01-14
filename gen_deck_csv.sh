@@ -20,7 +20,7 @@ if [[ $# -eq 3 ]]; then
 fi
 
 if [[ $# -eq 4 ]]; then
-  CARD_NOTE="$4"
+  DECK_FILE="$4"
   python python/check_for_new_students.py "$ROSTER_FILE" "$DECK_FILE"
 
   if [ $? -eq 0 ]; then
