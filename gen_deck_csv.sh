@@ -16,7 +16,6 @@ if [[ $# -eq 3 ]]; then
   mkdir ~/Library/Application\ Support/Anki2/"$ANKI_USERNAME"/collection.media/"$IMG_DIR_NAME"/
   pdfimages -all "$ROSTER_FILE" ~/Library/Application\ Support/Anki2/"$ANKI_USERNAME"/collection.media/"$IMG_DIR_NAME"/idphoto
   python python/gen_anki_csv.py "$ROSTER_FILE" "$TARGET_FILE" "$IMG_DIR_NAME" "$CARD_NOTE"
-  rm python/roster*
 fi
 
 if [[ $# -eq 4 ]]; then

@@ -18,7 +18,7 @@ tables = camelot.read_pdf(input_filename, pages='all')
 tables.export('python/roster.csv', f='csv') # json, excel, html, markdown, sqlite
 
 all_names = pd.Series()
-all_ids = pd.Series()
+all_ids = pd.Series(dtype=int)
 for i in range(20):
     try:
         csv = pd.read_csv(f'python/roster-page-{i+1}-table-1.csv')

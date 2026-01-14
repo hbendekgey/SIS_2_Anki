@@ -50,7 +50,7 @@ elif update_mode == 1:
         merged.loc[mask, col] = merged.loc[mask, f"{col}_new"]
 
     # Check for students without note, and add it
-    mask = ~merged["Front"].str.contains(note, regex=False, na=False)
+    mask = ~merged["Front"].str.contains(note, regex=False, na=False) & ~merged["Front_new"].isna()
     merged.loc[mask, "Front"] = (merged.loc[mask, "Front"] + "\n" + note)
 
     merged = merged[["Front", "Back", "ImagePath", "Id"]]
